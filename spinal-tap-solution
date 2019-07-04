@@ -1,0 +1,34 @@
+function spinalCase(str) {
+  let answer = str.split("");
+  let helper = "";
+  let regExNoSpace = /[^a-zA-Z]/g;
+  let regExCap = /[A-Z]/g;
+  let capArr = [];
+  let thingy = 0;
+  let regExUnder = /_/;
+  for (let i = 0; i< str.length; i++) {
+    if (regExCap.test(str[i]) === true) {
+      capArr.push(str[i]);
+    }
+  }
+  if (regExUnder.test(str) === true) {
+    str = str.toLowerCase();
+    capArr = [];
+  }
+  for (let j = 0; j<capArr.length; j++) {
+    if (regExNoSpace.test(str) === false) {
+      thingy = (answer.indexOf(capArr[j]));
+      answer.splice(thingy, 0, " ");
+    }
+  }
+  if (typeof answer === "object") {
+    str = answer.join("");
+  }
+  str = str.replace(regExNoSpace, "-");
+  str = str.toLowerCase();
+  str = str.replace(/^\W/, "");
+  return str;
+}
+
+let answer = spinalCase('This Is Spinal Tap');
+console.log(answer);
