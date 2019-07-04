@@ -1,0 +1,76 @@
+let change1 = {
+  "penny" : .01,
+  "nickel": .05,
+  "dime": .1,
+  "quarter": .25,
+  "one": 1,
+  "five": 5,
+  "ten": 10,
+  "twenty": 20,
+  "hundred": 100
+};
+
+function checkCashRegister(price, cash, cid) {
+  let helper = Math.floor((cash - price)*100)/100;
+  let change = "";
+  let helper1 = 0;
+  let helper2 = 0;
+  let helper3 = 0;
+  let answer = [];
+  let finalAnswer = [];
+  let finalAnswer1 = [];
+  let status = "OPEN";
+  let statusNum = 0;
+  for (let j = 0; j<cid.length; j++) {
+    statusNum += cid[j][1];
+  }
+  for (let users in change1) {
+    if (Math.floor(helper/change1[users]) > 0) {
+      answer.push(change1[users])
+    }
+  }
+  // Here is your change, ma'am.
+  let i = answer.length-1;
+  do {
+    if (answer[i] === helper) {
+    helper1 = helper/answer[i];
+    cid[i][1] -= (answer[i] * helper1);
+    helper1 = answer[i] * helper1;
+    change = [cid[i][0], helper1];
+    helper -= (helper1);
+    } else if (answer[i] < helper) {
+    helper1 = Math.floor(helper/answer[i]);
+    if (helper1 > Math.floor(cid[i][1]/answer[i])) {
+      helper1 = Math.floor(cid[i][1]/answer[i])
+    }
+    cid[i][1] -= (answer[i] * helper1);
+    helper -= (answer[i] *helper1);
+    helper = (Math.ceil((1000*(helper/1000))*1000))/1000
+    helper1 = answer[i] * helper1;
+    if (helper1 > 0) {
+    change = [cid[i][0], helper1];
+    finalAnswer.push(change);
+    helper3 += helper1;;
+    }
+    }
+    i--
+    } 
+    while (helper>0);
+    if (statusNum-helper <= 0 || helper3 < helper) {
+    status = "INSUFFICIENT_FUNDS";
+    finalAnswer = [];
+  } else if (helper3 === statusNum) {
+    status = "CLOSED";
+    cid.shift();
+    //cid.unshift(finalAnswer)
+    for (let p = 0; p<cid.length; p++) {
+      finalAnswer.push(cid[p]);
+    }
+  }
+  let realFinalAnswer = {status: "", change: []};
+  realFinalAnswer.status = status;
+  realFinalAnswer.change = finalAnswer;
+  console.log(realFinalAnswer.status);
+  console.log(realFinalAnswer.change);
+  return realFinalAnswer;
+};
