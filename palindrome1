@@ -1,0 +1,29 @@
+function palin(num) {
+  num = Math.pow(10, num-2);
+  let number1 = 9*num;
+  let number2 = 10*num;
+  console.log(number2);
+  let helper = 0;
+  let helper1 = "";
+  let arr = [];
+  let arr1 = [];
+  for (let j = number1; j<number2; j++) { 
+    for (let k = number1; k<number2; k++) {  
+      helper = j*k;
+      helper = helper.toString();
+      for (let i = helper.length-1; i>=0; i--) {
+        helper1 += helper[i];
+      }
+  if (helper1 === helper) {
+    arr.push(helper);
+    arr1.push([j, k]);
+    }
+    helper1 = "";
+  }
+  }
+  return arr[arr.length-1]
+}
+
+let answer = palin(3);
+//num can be any number between 3 and 6;
+console.log(answer);
