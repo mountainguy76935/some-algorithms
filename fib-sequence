@@ -1,0 +1,22 @@
+function sumFibs(num) {
+  num = num-1;
+  let fib = 1;
+  let arr = [];
+  let helper = 0;
+  let helper1 = 1;
+  for (let i = 0; i<num; i++) {
+    helper = arr[i-1] + arr[i];
+    if (i === 0) {
+      arr.push(0);
+      arr.push(1);
+    } else if (i >= 1) {
+      arr.push(helper);
+      helper1 += helper;
+      helper = 0;
+    }
+  }
+  return arr;
+}
+
+let answer = sumFibs(9);
+console.log(answer);
