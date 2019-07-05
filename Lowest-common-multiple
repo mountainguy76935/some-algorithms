@@ -1,0 +1,82 @@
+function sumPrimes(num) {
+  let primes = [];
+  let sets = [];
+  let arr1 = [];
+  for (let i =2; i< 23; i++) {
+    if (i % 2 !== 0 && i%3 !== 0 || i == 2 || i == 3 || i ==5 || i == 7){
+      primes.push(i);
+    }
+  }
+  for (let j = 2; j<=num; j++) {
+    sets.push(j);
+  }
+  for (let k = 0; k< sets.length; k++) {
+    for (let z=0; z<primes.length; z++) {
+      if (sets[k]%primes[z] == 0) {
+        arr1.push(sets[k]);
+      }
+    }
+    if (arr1.length == 0) {
+      primes.push(sets[k]);
+    }
+    arr1 = [];
+  }
+  return primes;
+};
+
+function smallestCommons(arr) {
+  arr = arr.sort((a,b) => a-b);
+  let arr1 = [];
+  let arr2 = [];
+  let arr3 = [];
+  let arr4 = [];
+  let helper = 0;
+  let helper1= 0;
+  let helper3 = 0;
+  let primes = sumPrimes(arguments[0][1]);
+  for (let j = arr[0]; j<= arr[1]; j++) {
+    arr1.push(j);
+  }
+  for (let i = 0; i<primes.length; i++) {
+    for (let z = 0; z<arr1.length; z++) {
+      if (arr1[z]%primes[i] === 0) {
+        arr3.push(arr1[z]/primes[i]);
+        arr3.push(arr1[z]/(arr1[z]/primes[i]));
+      }
+      arr3 = arr3.sort((a,b) => a-b);
+      if (arr3[1]%primes[i] === 0) {
+        helper = arr3[1];
+        arr3.pop();
+        arr3.push(helper/primes[i]);
+        arr3.push(helper/(helper/primes[i]));
+      }
+      if (typeof arr3[0] === 'number') {
+        arr2.push(arr3);
+      }
+      arr3=[];
+      helper = 0;
+    }
+  }
+  for (let k = 0; k< primes.length; k++) {
+    for (let b = 0; b<arr2.length; b++) {
+      for (let c = 0; c<arr2[b].length; c++) {
+      if (primes[k] === arr2[b][c]) {
+        helper = helper + 1;
+      }
+    }
+    helper = Math.pow(primes[k], helper);
+      if (helper> helper1) {
+      helper1 = helper;
+      };
+      helper = 0;
+    }
+    arr4.push(helper1);
+    helper1 = 0;
+  }
+  arr4 = arr4.filter(a => a>0);
+  arr = arr4.reduce((a,b) => a*b);
+  return arr;
+}
+
+let answer = smallestCommons([23, 18]);
+console.log(answer);
