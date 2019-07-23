@@ -1,0 +1,27 @@
+function palin(num) {
+  num = Math.pow(10, num-1);
+  let helper = 0;
+  let helper1 = "";
+  let arr = [];
+  let arr1 = [];
+  for (let j = 9*num; j<10*num; j++) { 
+    for (let k = 9*num; k<10*num; k++) {  
+      helper = j*k;
+      helper = helper.toString();
+      for (let i = helper.length-1; i>=0; i--) {
+        helper1 += helper[i];
+      }
+  if (helper1 === helper) {
+    arr.push(helper);
+    arr1 = [j, k];
+    }
+    helper1 = "";
+  }
+  }
+  arr = arr[arr.length-1];
+  arr1 = [arr, arr1];
+  return arr1;
+}
+
+let answer = palin(3);
+console.log(answer);
