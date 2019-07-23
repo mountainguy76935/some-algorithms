@@ -1,0 +1,29 @@
+
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  let answerArr = [];
+  let obj1 = collection;
+  let answer = [];
+  let check = 0;
+  for (let name in source) {
+    arr.push(name);
+  };
+  console.log(arr);
+  console.log(obj1[0][arr[0]]);
+  console.log(source[arr[0]]);
+  for (let i = 0; i<obj1.length; i++) {
+    for (let j = 0; j<arr.length; j++) {
+      if (source[arr[j]] === obj1[i][arr[j]]) {
+        check += 1;
+      }
+    }
+    if (check === arr.length) {
+      answerArr.push(obj1[i]);
+    }
+    check = 0;
+  }
+  return answerArr;
+}
+
+let answer = whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 });
