@@ -1,0 +1,28 @@
+function sumPrimes(num) {
+  let primes = [];
+  let sets = [];
+  let arr1 = [];
+  for (let i =2n; i< 23n; i++) {
+    if (i % 2n !== 0 && i%3n !== 0 || i == 2n || i == 3n || i ==5n || i == 7n){
+      primes.push(i);
+    }
+  }
+  for (let j = 2n; j<=num; j++) {
+    sets.push(j);
+  }
+  console.log(primes)
+  for (let k = 0; k< sets.length; k++) {
+    for (let z=0; z<primes.length; z++) {
+      if (sets[k]%primes[z] == 0) {
+        arr1.push(sets[k]);
+      }
+    }
+    if (arr1.length == 0) {
+      primes.push(sets[k]);
+    }
+    arr1 = [];
+  }
+  console.log(primes)
+}
+
+sumPrimes(600851475143);
