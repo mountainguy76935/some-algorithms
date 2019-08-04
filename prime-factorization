@@ -31,10 +31,17 @@ function sift(num) {
   for (let i = BigInt(primes.length)-1n; i>=0n; i--) {
     if (num%primes[i] === 0n) {
       answer.push(primes[i]);
-    }
+    } 
   }
- answer = answer.map((a)=>Number(a));
-  return answer;
+  if (answer[0] === num) {
+    return "it's prime!" 
+    } else {
+    answer = answer.map((a)=>Number(a));
+    return {
+      primeFactors: answer,
+      highestPrimeFactor: answer[0]
+  }
+}
 }
 
-console.log(sift(980n));
+console.log(sift(997n));
