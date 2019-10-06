@@ -1,0 +1,87 @@
+const findCoprime = (num) => {
+  let tracker = 0;
+  let siftFactors = () => {
+    let factors = [];
+    for (let i=2; i<num; i++) {
+      if (num%i === 0) {
+        factors.push(i);
+      }
+    }
+    return factors;
+  };
+
+  let helper = siftFactors();
+
+   let findPrimes = (arr) => {
+    let arrs = [];
+    let counter = 0;
+    for (let k=0; k<arr.length; k++) {
+      for (let j=0; j<arr.length; j++) {
+        if (arr[k] % arr[j] === 0) {
+          counter = counter+1;
+        }
+      }
+      if (counter<3) {
+        arrs.push(arr[k]);
+      }
+      counter = 0;
+    }
+    return arrs;
+  }; 
+
+  let finalStep = (arr) => {
+    let answer = [];
+    let tick = 0;
+    for (let i =2; i<num; i++) {
+      for (let j=0; j<arr.length; j++) {
+        if (i % arr[j] === 0) {
+          tick++;
+        }
+      }
+      if (tick < 1) {
+        answer.push(i);
+      }
+      tick = 0;
+    }
+    return answer;
+  }
+  helper = findPrimes(helper);
+  return finalStep(helper);
+};
+
+let answerzzz = (function findKey() {
+  let primes = [2, 3, 5, 7, 11, 13, 17, 19, 23];
+  let func = () => {
+    return Math.floor(Math.random()*15+1);
+  };
+  let numA;
+  let numB;
+  let base;
+  let mod;
+  do{
+    mod = primes[Math.floor(Math.random()*10)]
+  }
+  while(primes.indexOf(mod)<0 || mod === undefined);
+  let coPrimes = findCoprime(mod-1);
+  if (typeof coPrimes[0] === 'number') {
+  do{
+    base = coPrimes[Math.floor(Math.random()*10)]
+  }
+  while(coPrimes.indexOf(base)<0 || base === undefined);
+  } else {
+    base = mod-1;
+  }
+  do {
+  numA = func();
+  numB = func();
+  }
+  while(numA === numB && base === numA && base === numB);
+  console.log({base: base, mod: mod, numA: numA, numB: numB});
+  let a = Math.pow(base, numA) % mod;
+  let b = Math.pow(base, numB) % mod;
+  let secretA = Math.pow(b, numA) % mod;
+  let secretB = Math.pow(a, numB) % mod;
+  return [secretA, secretB];
+})()
+
+console.log(answerzzz)
