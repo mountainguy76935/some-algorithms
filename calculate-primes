@@ -1,28 +1,26 @@
-function sumPrimes(num) {
-  let primes = [];
-  let sets = [];
-  let arr1 = [];
-  for (let i =2; i< 23; i++) {
-    if (i % 2 !== 0 && i%3 !== 0 || i == 2 || i == 3 || i ==5 || i == 7){
-      primes.push(i);
-    }
+function findPrimes(num) {
+  if (num<=2) {
+    return [2]
   }
-  for (let j = 2; j<=num; j++) {
-    sets.push(j);
-  }
-  console.log(primes)
-  for (let k = 0; k< sets.length; k++) {
-    for (let z=0; z<primes.length; z++) {
-      if (sets[k]%primes[z] == 0) {
-        arr1.push(sets[k]);
+  let answer = [2];
+  let pushed = null;
+  let check = 2
+  while(check<=num) {
+      for (let i = 0; i<answer.length; i++) {
+        if (check%answer[i] === 0) {
+          pushed = null;
+          break;
+        } else {
+          pushed = check
+        } 
       }
+    if (pushed) {
+      answer.push(pushed)
     }
-    if (arr1.length == 0) {
-      primes.push(sets[k]);
-    }
-    arr1 = [];
+    pushed = null;
+    check++;
   }
-  console.log(primes)
+  return answer
 }
 
-sumPrimes(100);
+let arr = findPrimes(200);
