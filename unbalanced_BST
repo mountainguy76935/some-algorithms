@@ -35,6 +35,26 @@ class BST {
       }
     }
   }
+  breadthFirstSearch(queue, value){
+      let currentNode;
+      if (!queue && !value) {
+        currentNode = this.root;
+        queue = [currentNode];
+        value=[];
+      }
+      if (!queue[0]) {
+        return value
+      }
+      currentNode = queue.shift(); 
+      value.push(currentNode.value);
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+      return this.breadthFirstSearch(queue, value)
+    }
 }
 
 let newestNode = new BST();
