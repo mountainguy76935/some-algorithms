@@ -55,6 +55,20 @@ class BST {
       }
       return this.breadthFirstSearch(queue, value)
     }
+    DFSInOrder() {
+      function inOrder(node, list) {
+        console.log(node.value)
+        if (node.left) {
+          inOrder(node.left, list)
+        }
+        list.push(node.value);
+        if (node.right) {
+          inOrder(node.right, list)
+        }
+        return list
+      }
+      return inOrder(this.root, []);
+  }
 }
 
 let newestNode = new BST();
