@@ -1,0 +1,46 @@
+class Node {
+  constructor(val) {
+    this.left = null;
+    this.right = null;
+    this.value = val;
+  }
+};
+
+class BST {
+    constructor() {
+      this.root = null;
+    }
+    add(val){
+      let newNode = new Node(val);
+      if (!this.root) {
+        this.root = newNode;
+        return;
+      }
+      let check = this.root;
+      while(true) {
+      if (newNode.value < check.value) {
+        if (!check.left) {
+          check.left = newNode;
+          return;
+        } else {
+          check=check.left
+        }
+      } else if (newNode.value > check.value) {
+        if (!check.right) {
+          check.right = newNode
+          return;
+        } else {
+          check=check.right
+        }
+      }
+    }
+  }
+}
+
+let newestNode = new BST();
+newestNode.add(9);
+newestNode.add(10);
+newestNode.add(11);
+
+
+console.log(newestNode)
