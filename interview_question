@@ -1,0 +1,22 @@
+function perm(arr, num) {
+  arr = arr.sort((a,b) => a-b);
+  console.log(arr)
+  let answer = [];
+  let start = 0;
+  let end = arr.length-1;
+  while(end>start) {
+    if (arr[start] + arr[end] === num) {
+      answer.push([arr[start], arr[end]]);
+      start++;
+      end--;
+    } else if (arr[start] + arr[end] > num) {
+      end--;
+    } else if (arr[start] + arr[end] < num) {
+      start++
+    }
+    if (answer[0]) {
+      return true
+    }
+  }
+  return false
+}
