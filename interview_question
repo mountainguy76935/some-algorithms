@@ -1,21 +1,16 @@
 function perm(arr, num) {
   arr = arr.sort((a,b) => a-b);
-  console.log(arr)
-  let answer = [];
   let start = 0;
   let end = arr.length-1;
+  let test;
   while(end>start) {
-    if (arr[start] + arr[end] === num) {
-      answer.push([arr[start], arr[end]]);
-      start++;
+    test = arr[start] + arr[end]
+    if (test === num) {
+      return true;
+    } else if (test > num) {
       end--;
-    } else if (arr[start] + arr[end] > num) {
-      end--;
-    } else if (arr[start] + arr[end] < num) {
+    } else if (test < num) {
       start++
-    }
-    if (answer[0]) {
-      return true
     }
   }
   return false
