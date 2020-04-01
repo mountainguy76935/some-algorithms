@@ -1,0 +1,19 @@
+function recur(str) {
+  let answer = [];
+  if (str.length <2) {
+    answer.push(str)
+    return answer;
+  }
+  for (let i = 0; i<str.length; i++) {
+    let first = str[i];
+    let rest = str.substring(0, i) + str.substring(i+1)
+    let hold = recur(rest);
+    for (let j = 0; j<hold.length; j++) {
+      answer.push(first+hold[j]);
+    }
+  }
+  return answer.sort()
+};
+
+let answer2 = recur('0123');
+console.log(answer2)
