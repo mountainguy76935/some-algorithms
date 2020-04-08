@@ -2,7 +2,6 @@ function find(arr, test) {
   arr = arr.sort((a,b) => a-b);
   let check;
   while(arr.length>1) {
-    console.log(arr, arr[Math.floor(arr.length/2)])
     if (arr[Math.floor(arr.length/2)] < test) {
       arr = arr.splice(Math.floor(arr.length/2), arr[arr.length-1])
     } else if (arr[Math.floor(arr.length/2)] > test) {
